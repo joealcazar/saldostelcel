@@ -4,6 +4,9 @@
   <artifactId>SaldosTelcel</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
+  <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>javax.activation</groupId>
@@ -264,6 +267,7 @@
         <version>3.8.0</version>
         <configuration>
           <!-- release>9</release-->
+          <encoding>UTF-8</encoding>
         </configuration>
       </plugin>
       <plugin>
