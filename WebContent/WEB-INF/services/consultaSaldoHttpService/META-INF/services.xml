@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- This file was auto-generated from WSDL --><!-- by the Apache Axis2 version: 1.7.9  Built on : Nov 16, 2018 (12:05:37 GMT) --><serviceGroup>
+    <service name="consultaSaldoHttpService">
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="mx.com.amx.www.mexico.telcel.di.sds.bes.ti.consultasaldo.ConsultaSaldoHttpServiceMessageReceiverInOut"/>
+        </messageReceivers>
+        <parameter name="ServiceClass">mx.com.amx.www.mexico.telcel.di.sds.bes.ti.consultasaldo.ConsultaSaldoHttpServiceSkeleton</parameter>
+        <parameter name="useOriginalwsdl">true</parameter>
+        <parameter name="modifyUserWSDLPortAddress">true</parameter>
+        <operation name="consultaSaldo" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.amx.com.mx/mexico/telcel/di/sds/bes/ti/consultasaldo">
+            <actionMapping>http://www.amx.com.mx/mexico/telcel/di/sds/bes/ti/consultasaldo/consultaSaldo</actionMapping>
+            <outputActionMapping>http://www.amx.com.mx/mexico/telcel/di/sds/bes/ti/consultasaldo/consultaSaldo/consultaSaldoResponse</outputActionMapping>
+            <faultActionMapping faultName="consultaSaldoException">http://www.amx.com.mx/mexico/telcel/di/sds/bes/ti/consultasaldo/consultaSaldo/consultaSaldo/Fault/consultaSaldoException</faultActionMapping>
+            <faultActionMapping faultName="ConsultaSaldoException">http://www.amx.com.mx/mexico/telcel/di/sds/bes/ti/consultasaldo/consultaSaldo/consultaSaldo/Fault/consultaSaldoException</faultActionMapping>
+            <faultActionMapping faultName="ConsultaSaldoException_Exception">http://www.amx.com.mx/mexico/telcel/di/sds/bes/ti/consultasaldo/consultaSaldo/consultaSaldo/Fault/consultaSaldoException</faultActionMapping>
+        </operation>
+    </service>
+</serviceGroup>

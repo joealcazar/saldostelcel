@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://www.amx.com.mx/mexico/telcel/di/sds/bes/ti/consultasaldo" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="consultaSaldo" targetNamespace="http://www.amx.com.mx/mexico/telcel/di/sds/bes/ti/consultasaldo">
+     <wsdl:documentation>
+          <wsdl:appinfo source="WMQI_APPINFO">
+               <MRWSDLAppInfo imported="true">
+                    <binding hasEncoding="false" imported="true" name="consultaSaldoHttpBinding" originalBindingStyle="document"/>
+               </MRWSDLAppInfo>
+          </wsdl:appinfo>
+     </wsdl:documentation>
+     <!--JAX-WS RI's version is 2.1.4-b01-.-->
+     <wsdl:types>
+          <xsd:schema targetNamespace="http://www.amx.com.mx/mexico/telcel/di/sds/bes/ti/consultasaldo">
+               <xsd:include schemaLocation="consultaSaldo_schema1.xsd"/>
+          </xsd:schema>
+     </wsdl:types>
+     <wsdl:message name="consultaSaldoRequest">
+          <wsdl:part element="tns:consultaSaldo" name="consultaSaldoRequest"/>
+     </wsdl:message>
+     <wsdl:message name="consultaSaldoResponse">
+          <wsdl:part element="tns:consultaSaldoResponse" name="consultaSaldoResponse"/>
+     </wsdl:message>
+     <wsdl:message name="consultaSaldoException">
+          <wsdl:part element="tns:consultaSaldoException" name="consultaSaldoException"/>
+     </wsdl:message>
+     <wsdl:portType name="consultaSaldo">
+          <wsdl:operation name="consultaSaldo">
+               <wsdl:input message="tns:consultaSaldoRequest" name="consultaSaldoRequest"/>
+               <wsdl:output message="tns:consultaSaldoResponse" name="consultaSaldoResponse"/>
+               <wsdl:fault message="tns:consultaSaldoException" name="consultaSaldoException"/>
+          </wsdl:operation>
+     </wsdl:portType>
+     <wsdl:binding name="consultaSaldoHttpBinding" type="tns:consultaSaldo">
+          <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+          <wsdl:operation name="consultaSaldo">
+               <soap:operation soapAction="http://www.amx.com.mx/mexico/telcel/di/sds/bes/ti/consultasaldo/consultaSaldo"/>
+               <wsdl:input name="consultaSaldoRequest">
+                    <soap:body use="literal"/>
+               </wsdl:input>
+               <wsdl:output name="consultaSaldoResponse">
+                    <soap:body use="literal"/>
+               </wsdl:output>
+               <wsdl:fault name="consultaSaldoException">
+                    <soap:fault name="consultaSaldoException" use="literal"/>
+               </wsdl:fault>
+          </wsdl:operation>
+     </wsdl:binding>
+     <wsdl:service name="consultaSaldoHttpService">
+          <wsdl:port binding="tns:consultaSaldoHttpBinding" name="consultaSaldoHttpPort">
+               <soap:address location="http://localhost:9080/mexico/telcel/di/sds/bes/ti/consultasaldo"/>
+          </wsdl:port>
+     </wsdl:service>
+</wsdl:definitions>

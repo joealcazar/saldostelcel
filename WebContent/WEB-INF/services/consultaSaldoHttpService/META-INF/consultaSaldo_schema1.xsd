@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tlc="http://amx.com/mexico/telcel/esb/v1_2" xmlns:tns="http://www.amx.com.mx/mexico/telcel/di/sds/bes/ti/consultasaldo" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.amx.com.mx/mexico/telcel/di/sds/bes/ti/consultasaldo">
+    <xs:import namespace="http://amx.com/mexico/telcel/esb/v1_2" schemaLocation="americamovil_telcel_v1_2.xsd"/>
+    <xs:simpleType name="CadenaAlfanumerica32Type">
+        <xs:annotation>
+            <xs:documentation>Cadena (string) de 32 caracteres, que admite cualquier valor alfanumérico y vacío.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="0"/>
+            <xs:maxLength value="32"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Telco_MSISDNType">
+        <xs:annotation>
+            <xs:documentation>MSISDN (de sus siglas en inglés mobile station integrated services digital network). Con este número nos pueden identificar y es el número que sirve para recordarnos.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length fixed="true" value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="BoleanoType">
+        <xs:annotation>
+            <xs:documentation>Tipo de dato boleano</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:boolean"/>
+    </xs:simpleType>
+    <xs:simpleType name="Decimal14c6Type">
+        <xs:annotation>
+            <xs:documentation>Tipo de Dato Decimal de 14 posiciones y 6 decimales</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+            <xs:totalDigits value="14"/>
+            <xs:fractionDigits value="6"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="CsSaldoBalanceType">
+        <xs:annotation>
+            <xs:documentation>Dato complejo para el manejo de saldos: actual, estimado y con penalizaciones.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element minOccurs="0" name="saldoActual" type="tns:Decimal14c6Type"/>
+            <xs:element minOccurs="0" name="saldoEstimado" type="tns:Decimal14c6Type"/>
+            <xs:element minOccurs="0" name="saldoPenalizaciones" type="tns:Decimal14c6Type"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CsSaldoCapasType">
+        <xs:annotation>
+            <xs:documentation>Dato Complejo para el manejo de saldos en capas (envejecimieto de la deuda).</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="saldoMes" type="tns:Decimal14c6Type"/>
+            <xs:element name="saldo30Dias" type="tns:Decimal14c6Type"/>
+            <xs:element name="saldo60Dias" type="tns:Decimal14c6Type"/>
+            <xs:element name="saldo90Dias" type="tns:Decimal14c6Type"/>
+            <xs:element name="saldo120Dias" type="tns:Decimal14c6Type"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ConsultaSaldo">
+        <xs:sequence>
+            <xs:element name="controlData" type="tlc:ControlDataRequestHeaderType"/>
+            <xs:element name="consultaSaldo" type="tns:ConsultaSaldoPetType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ConsultaSaldoResponse">
+        <xs:sequence>
+            <xs:element name="controlData" type="tlc:ControlDataResponseHeaderType"/>
+            <xs:element name="detailResponse" type="tlc:DetailResponseType"/>
+            <xs:element name="consultaSaldoResponse" type="tns:ConsultaSaldoRespType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="consultaSaldoException">
+        <xs:sequence>
+            <xs:element name="controlData" type="tlc:ControlDataResponseHeaderType"/>
+            <xs:element name="detailFail" type="tlc:DetailFailType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ConsultaSaldoPetType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="codigoCuenta" type="tns:CadenaAlfanumerica32Type"/>
+                <xs:element name="msisdn" type="tns:Telco_MSISDNType"/>
+            </xs:choice>
+            <xs:element name="cSaldoActual" type="tns:BoleanoType"/>
+            <xs:element name="cSaldoEstimado" type="tns:BoleanoType"/>
+            <xs:element name="cSaldoPenalizaciones" type="tns:BoleanoType"/>
+            <xs:element name="cSaldoCapas" type="tns:BoleanoType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ConsultaSaldoRespType">
+        <xs:sequence>
+            <xs:element name="codigoCuenta" type="tns:CadenaAlfanumerica32Type"/>
+            <xs:element minOccurs="0" name="csSaldoBalance" type="tns:CsSaldoBalanceType"/>
+            <xs:element minOccurs="0" name="csSaldoCapas" type="tns:CsSaldoCapasType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="consultaSaldo" type="tns:ConsultaSaldo"/>
+    <xs:element name="consultaSaldoResponse" type="tns:ConsultaSaldoResponse"/>
+    <xs:element name="consultaSaldoException" type="tns:consultaSaldoException"/>
+</xs:schema>
